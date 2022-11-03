@@ -18,28 +18,38 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Todo List: </h1>
+    <h1>Grocery Shopping List: </h1>
     <ul class="todoItems">
     <% for(let i=0; i < items.length; i++) {%>
         <li class="item">
             <% if(items[i].completed === true) {%>
                 <span class='completed'><%= items[i].thing %></span>
+                <span class="completed">$<%= items[i].itemCost %></span>
             <% }else{ %>
                 <span><%= items[i].thing %></span>
+                <span>$<%= items[i].itemCost %></span>
             <% } %>    
             <span class='fa fa-trash'></span>
         </li>
     <% } %>
     </ul>
 
-    <h2>Left to do: <%= left %></h2>
+    <h2>Items in Cart: <%= inCart %></h2>
+    <h2>Items Purchased: <%= purchased %></h2>
+    <h2>Cart Total: $ </h2>
 
-    <h2>Add A Todo:</h2>
+    <h2>Add A Grocery Item:</h2>
 
     <form action="/addTodo" method="POST">
-        <input type="text" placeholder="Thing To Do" name="todoItem">
-        <input type="submit">
+        <input type="text" placeholder="Grocery Item" name="todoItem">
+        <input type="number" placeholder="Cost of Item" name="itemCost">
+        <input type="submit" value="Add Item">
     </form>
+
+    <!-- <form action="/budget" method="POST">
+        <input type="number" placeholder="Grocery Budget" name="budget">
+        <input type="submit" value="Add Budget">
+    </form> -->
     
 
     <script src='js/main.js'></script>
