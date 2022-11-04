@@ -25,8 +25,14 @@ app.get('/',async (request, response)=>{
     const todoItems = await db.collection('todos').find().toArray()
     const itemsPurchased = await db.collection('todos').countDocuments({completed: true})
     const itemsInCart = await db.collection('todos').countDocuments({completed: false})
+
+    let totalCost = 0;
+    for (const item of todoItems) {
+        totalCost += Number(item.itemCost)
+    }
+
     response.render('index.ejs',{ 
-        items: todoItems, inCart: itemsInCart, purchased: itemsPurchased
+        items: todoItems, inCart: itemsInCart, purchased: itemsPurchased, subtotal: totalCost.toFixed(2)
     })
     // response.render('index.ejs', { items: todoItems, purchased: itemsPurchased })
     
